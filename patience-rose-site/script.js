@@ -8,7 +8,7 @@ const productImageLink=p=>new URL('assets/catalog/'+encodeURIComponent(p.file),w
 const preorderUrl=p=>'https://wa.me/233554441213?text='+encodeURIComponent(
  'Hello Patience Rose, I would like to preorder '+p.name+' ('+p.category+').\n\n'+
  'Product: '+productLink(p)+'\n'+
- 'Image: '+productImageLink(p)+'\n\n'+
+ '\n'+
  'Please share the available sizes, price and delivery details.'
 );
 function renderProducts(filter='all'){
