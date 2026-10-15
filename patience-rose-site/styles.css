@@ -112,3 +112,18 @@ html,body{max-width:100%;overflow-x:clip}
 .story-bio h2{font-size:10vw}
 .story-bio>p:not(.eyebrow){font-size:14px}
 }
+
+
+/* Contact and WhatsApp preorder */
+.header-contact{font-size:10px;font-weight:800;letter-spacing:.07em;color:#fff;white-space:nowrap}
+.header-contact:hover,.footer-contact:hover{color:var(--red)}
+.product-preorder{display:flex;align-items:center;justify-content:center;min-height:42px;padding:10px 12px;border:1px solid #1d1d1d;background:#111;color:#fff;text-align:center;font-size:10px;font-weight:800;letter-spacing:.08em;transition:background .2s ease}
+.product-preorder:hover{background:var(--red);border-color:var(--red)}
+.dialog-back-link{display:block;border:0;background:none;color:#aaa;cursor:pointer;font-size:10px;font-weight:800;letter-spacing:.1em;margin-top:16px;padding:10px 0}
+.dialog-back-link:hover{color:#fff}
+.footer-bottom a{color:inherit}
+.footer-bottom a:hover{color:var(--red)}
+@media(max-width:1100px){.header-contact{font-size:9px;letter-spacing:0}}
+@media(max-width:850px){.header-contact{display:none}}
+@media(max-width:700px){.product-preorder{min-height:44px;font-size:9px;padding:10px 6px}.dialog-info #dialog-preorder{width:100%;justify-content:center}.footer-main .footer-contact{font-size:10px}}
+@media(max-width:390px){.product-preorder{font-size:8px;letter-spacing:.01em}}
