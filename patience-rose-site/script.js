@@ -2,6 +2,7 @@ const filenames=["wild-flowers","ladies-3","cap-3","wild-flowers-2","legacy","pe
 const products=filenames.map((slug)=>({file:slug+'.webp',name:slug.replace(/^lladies-/,'ladies-').split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' '),category:slug.startsWith('cap-')?'caps':slug.startsWith('ladies-')||slug.startsWith('lladies-')?'ladies':'men'}));
 const grid=document.getElementById('product-grid');
 const dialog=document.getElementById('product-dialog');
+const preorderUrl=p=>'https://wa.me/233554441213?text='+encodeURIComponent('Hello Patience Rose, I would like to preorder '+p.name+' ('+p.category+'). Please share the available sizes, price and delivery details.');
 function renderProducts(filter='all'){
  grid.replaceChildren();
  const visible=products.filter(p=>filter==='all'||p.category===filter);
@@ -11,7 +12,7 @@ function renderProducts(filter='all'){
   const img=document.createElement('img');img.className='merch-photo';img.src='assets/catalog/'+p.file;img.alt=p.name+' clothing or accessory image';img.loading=i<6?'eager':'lazy';img.decoding='async';
   const serial=document.createElement('span');serial.className='corner-num';serial.textContent=String(i+1).padStart(2,'0')+' / '+visible.length;preview.append(img,serial);
   const meta=document.createElement('div');meta.className='product-meta';const nameArea=document.createElement('div');const heading=document.createElement('h3');heading.className='product-name';heading.textContent=p.name;const subtype=document.createElement('span');subtype.className='product-type';subtype.textContent=p.category.toUpperCase()+' / PATIENCE ROSE';nameArea.append(heading,subtype);
-  const arrow=document.createElement('button');arrow.className='product-arrow';arrow.textContent='↗';arrow.setAttribute('aria-label','View '+p.name);meta.append(nameArea,arrow);card.append(preview,meta);grid.append(card);
+  const arrow=document.createElement('button');arrow.className='product-arrow';arrow.textContent='↗';arrow.setAttribute('aria-label','View '+p.name);meta.append(nameArea,arrow);const preorder=document.createElement('a');preorder.className='product-preorder';preorder.href=preorderUrl(p);preorder.target='_blank';preorder.rel='noopener noreferrer';preorder.textContent='PREORDER VIA WHATSAPP ↗';preorder.setAttribute('aria-label','Enquire about preordering '+p.name+' on WhatsApp');card.append(preview,meta,preorder);grid.append(card);
   preview.addEventListener('click',()=>showProduct(p));arrow.addEventListener('click',()=>showProduct(p));
  });
  document.querySelectorAll('.filter').forEach(b=>{const on=b.dataset.filter===filter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
@@ -19,6 +20,7 @@ function renderProducts(filter='all'){
 function showProduct(p){
  document.getElementById('dialog-title').textContent=p.name;
  document.getElementById('dialog-description').textContent='Patience Rose '+(p.category==='caps'?'cap':p.category==='ladies'?'ladieswear':'menswear')+' design. Product details will be confirmed ahead of launch.';
+ document.getElementById('dialog-preorder').href=preorderUrl(p);
  const ph=document.querySelector('.dialog-preview');ph.classList.add('has-merch');ph.querySelector('.dialog-merch')?.remove();
  const img=document.createElement('img');img.className='dialog-merch';img.src='assets/catalog/'+p.file;img.alt=p.name+' merchandise image';ph.append(img);dialog.showModal();
 }
