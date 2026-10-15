@@ -2,7 +2,15 @@ const filenames=["wild-flowers","ladies-3","cap-3","wild-flowers-2","legacy","pe
 const products=filenames.map((slug)=>({file:slug+'.webp',name:slug.replace(/^lladies-/,'ladies-').split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' '),category:slug.startsWith('cap-')?'caps':slug.startsWith('ladies-')||slug.startsWith('lladies-')?'ladies':'men'}));
 const grid=document.getElementById('product-grid');
 const dialog=document.getElementById('product-dialog');
-const preorderUrl=p=>'https://wa.me/233554441213?text='+encodeURIComponent('Hello Patience Rose, I would like to preorder '+p.name+' ('+p.category+'). Please share the available sizes, price and delivery details.');
+const productSlug=p=>p.file.replace(/\.webp$/,'');
+const productLink=p=>new URL('?product='+encodeURIComponent(productSlug(p))+'#collection',window.location.origin+window.location.pathname).href;
+const productImageLink=p=>new URL('assets/catalog/'+encodeURIComponent(p.file),window.location.href).href;
+const preorderUrl=p=>'https://wa.me/233554441213?text='+encodeURIComponent(
+ 'Hello Patience Rose, I would like to preorder '+p.name+' ('+p.category+').\n\n'+
+ 'Product: '+productLink(p)+'\n'+
+ 'Image: '+productImageLink(p)+'\n\n'+
+ 'Please share the available sizes, price and delivery details.'
+);
 function renderProducts(filter='all'){
  grid.replaceChildren();
  const visible=products.filter(p=>filter==='all'||p.category===filter);
@@ -32,4 +40,10 @@ document.querySelectorAll('[data-shop]').forEach(link=>link.addEventListener('cl
 const menuBtn=document.querySelector('.menu-toggle'),mobileNav=document.querySelector('.mobile-nav');
 menuBtn.addEventListener('click',()=>{const opened=menuBtn.getAttribute('aria-expanded')==='true';menuBtn.setAttribute('aria-expanded',String(!opened));mobileNav.hidden=opened});
 mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.hidden=true;menuBtn.setAttribute('aria-expanded','false')}));
-document.getElementById('year').textContent=new Date().getFullYear();renderProducts();
+document.getElementById('year').textContent=new Date().getFullYear();
+renderProducts();
+const selectedSlug=new URLSearchParams(window.location.search).get('product');
+if(selectedSlug){
+ const selectedProduct=products.find(p=>productSlug(p)===selectedSlug);
+ if(selectedProduct){renderProducts(selectedProduct.category);showProduct(selectedProduct);}
+}
