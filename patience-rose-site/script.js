@@ -10,6 +10,7 @@ const products = [
  {name:'Ghetto Warriors',category:'expression',desc:'A strong visual statement about resilience and perseverance.'},
  {name:'Heaven and Hell',category:'spirit',desc:'A design exploring contrast, belief and the journey between extremes.'}
 ];
+const productImages={Prodigy:'prodigy',Legacy:'legacy',Sacred:'sacred',Moonlight:'moonlight',Solidarity:'solidarity','Rise of the Legends':'rise-of-the-legends','Wild Flowers':'wild-flowers','Ghetto Warriors':'ghetto-warriors','Heaven and Hell':'heaven-and-hell'};
 const grid=document.getElementById('product-grid');
 const dialog=document.getElementById('product-dialog');
 function renderProducts(filter='all'){
@@ -21,7 +22,10 @@ function renderProducts(filter='all'){
   const serial=document.createElement('span');serial.className='corner-num';serial.textContent=String(index+1).padStart(2,'0')+' / 10';
   const type=document.createElement('span');type.className='design-text';type.textContent=p.name;
   const note=document.createElement('span');note.className='image-note';note.textContent='PHOTO COMING SOON';
-  preview.append(serial,type,note);
+  if(productImages[p.name]){
+   const img=document.createElement('img');img.className='merch-photo';img.src='assets/merch/'+productImages[p.name]+'.webp';img.alt=p.name+' merchandise design';img.loading='lazy';img.decoding='async';preview.classList.add('has-merch');preview.append(img,serial);
+  } else {preview.append(serial,type,note);}
+
   const meta=document.createElement('div');meta.className='product-meta';
   const nameArea=document.createElement('div');const heading=document.createElement('h3');heading.className='product-name';heading.textContent=p.name;
   const subtype=document.createElement('span');subtype.className='product-type';subtype.textContent='THE PRODIGY COLLECTION';nameArea.append(heading,subtype);
@@ -29,7 +33,7 @@ function renderProducts(filter='all'){
   preview.addEventListener('click',()=>showProduct(p));arrow.addEventListener('click',()=>showProduct(p));
  });
 }
-function showProduct(p){document.getElementById('dialog-title').textContent=p.name;document.getElementById('dialog-description').textContent=p.desc;document.getElementById('dialog-monogram').textContent=p.name==='Prodigy'?'X':'PR';dialog.showModal()}
+function showProduct(p){document.getElementById('dialog-title').textContent=p.name;document.getElementById('dialog-description').textContent=p.desc;document.getElementById('dialog-monogram').textContent=p.name==='Prodigy'?'X':'PR';const ph=document.querySelector('.dialog-preview');const existing=ph.querySelector('.dialog-merch');if(existing)existing.remove();ph.classList.toggle('has-merch',Boolean(productImages[p.name]));if(productImages[p.name]){const img=document.createElement('img');img.className='dialog-merch';img.src='assets/merch/'+productImages[p.name]+'.webp';img.alt=p.name+' merchandise design';ph.append(img)}dialog.showModal()}
 document.getElementById('dialog-close').addEventListener('click',()=>dialog.close());document.getElementById('dialog-back').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(item=>{item.classList.toggle('active',item===btn);item.setAttribute('aria-pressed',String(item===btn))});renderProducts(btn.dataset.filter)}));
 const menuBtn=document.querySelector('.menu-toggle'),mobileNav=document.querySelector('.mobile-nav');menuBtn.addEventListener('click',()=>{const isOpen=menuBtn.getAttribute('aria-expanded')==='true';menuBtn.setAttribute('aria-expanded',String(!isOpen));mobileNav.hidden=isOpen});mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.hidden=true;menuBtn.setAttribute('aria-expanded','false')}));
