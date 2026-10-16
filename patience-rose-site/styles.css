@@ -127,3 +127,8 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:850px){.header-contact{display:none}}
 @media(max-width:700px){.product-preorder{min-height:44px;font-size:9px;padding:10px 6px}.dialog-info #dialog-preorder{width:100%;justify-content:center}.footer-main .footer-contact{font-size:10px}}
 @media(max-width:390px){.product-preorder{font-size:8px;letter-spacing:.01em}}
+
+/* Product storytelling: keep descriptions readable across screen sizes */
+.product-meta>div:first-child{min-width:0;flex:1}
+.product-description{font-family:'DM Sans',Arial,sans-serif;font-weight:400;font-size:12px;line-height:1.6;letter-spacing:0;color:#565656;margin:11px 0 0;max-width:42ch}
+@media(max-width:700px){.product-description{font-size:11px;line-height:1.55;margin-top:9px}}
