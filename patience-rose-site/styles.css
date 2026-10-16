@@ -132,3 +132,20 @@ html,body{max-width:100%;overflow-x:clip}
 .product-meta>div:first-child{min-width:0;flex:1}
 .product-description{font-family:'DM Sans',Arial,sans-serif;font-weight:400;font-size:12px;line-height:1.6;letter-spacing:0;color:#565656;margin:11px 0 0;max-width:42ch}
 @media(max-width:700px){.product-description{font-size:11px;line-height:1.55;margin-top:9px}}
+
+/* Work with us: partnerships, collaborations and investment */
+.opportunities{background:#0e0e0e;color:#fff;scroll-margin-top:24px}
+.opportunities-heading{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);align-items:end;gap:40px;margin-bottom:52px}
+.opportunities h2{font:900 clamp(62px,8vw,126px)/.87 'Barlow Condensed',Impact,sans-serif;letter-spacing:-.035em;margin:0}
+.opportunities-heading>p{font-size:15px;line-height:1.8;color:#bebebe;max-width:420px;margin:0}
+.opportunities-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#3b3b3b;border:1px solid #3b3b3b}
+.opportunity-card{background:#131313;display:flex;flex-direction:column;min-width:0;min-height:308px;padding:28px 22px}
+.opportunity-number{font-size:11px;color:var(--red);font-weight:800;letter-spacing:.2em}
+.opportunity-card h3{font:800 clamp(27px,2.9vw,42px)/.95 'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;margin:43px 0 17px}
+.opportunity-card p{font-size:12px;line-height:1.75;color:#b4b4b4;margin:0 0 26px}
+.opportunity-card a{margin-top:auto;display:flex;justify-content:space-between;gap:12px;align-items:center;color:white;font-size:10px;font-weight:800;letter-spacing:.07em;border-top:1px solid #3b3b3b;padding-top:17px}
+.opportunity-card a:hover,.opportunities-foot a:hover{color:var(--red)}
+.opportunities-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:26px;font-size:12px;color:#aaa}
+.opportunities-foot a{font-size:10px;font-weight:800;letter-spacing:.12em;color:white}
+@media(max-width:1100px){.opportunities-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.opportunities-heading{grid-template-columns:1fr 1fr}.opportunity-card{min-height:260px}}
+@media(max-width:700px){.opportunities-heading{grid-template-columns:1fr;gap:26px;margin-bottom:35px}.opportunities h2{font-size:clamp(63px,14vw,98px)}.opportunities-heading>p{font-size:13px}.opportunities-grid{grid-template-columns:1fr}.opportunity-card{min-height:210px;padding:23px}.opportunity-card h3{margin:26px 0 12px;font-size:36px}.opportunity-card p{max-width:34ch}.opportunities-foot{flex-direction:column;align-items:flex-start;line-height:1.6}}
