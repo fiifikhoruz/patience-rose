@@ -165,3 +165,9 @@ html,body{max-width:100%;overflow-x:clip}
 .footer-main>.footer-contact{justify-self:end;text-align:right}
 @media(max-width:800px){.footer-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.footer-brand{grid-column:1/-1;max-width:620px}.footer-main>.footer-contact{justify-self:end}.footer-main>span{order:initial;flex-basis:auto}}
 @media(max-width:480px){.footer-main{grid-template-columns:1fr;gap:18px}.footer-brand{grid-column:auto}.footer-brand-intro{font-size:12px}.footer-story-content p{font-size:12px}.footer-main>.footer-contact{justify-self:start;text-align:left}.footer-main>span{order:initial}}
+
+.footer-contact-group{display:flex;flex-direction:column;align-items:flex-end;gap:13px;min-width:0;justify-self:end}
+.footer-contact-group a{display:block;overflow-wrap:anywhere;text-align:right}
+.footer-email{color:#bababa;font-size:11px;letter-spacing:.025em}
+.footer-email:hover{color:var(--red)}
+@media(max-width:480px){.footer-contact-group{justify-self:start;align-items:flex-start}.footer-contact-group a{text-align:left}}
